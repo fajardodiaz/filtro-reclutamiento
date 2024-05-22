@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Filtro HV{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <h2 class="fs-1 fw-bold text-center pt-5">Filtro de Hojas de Vida</h2>
+
+    <div class="container">
+
+        <form action="{{ url_for('filter')}}" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="keywords" class="form-label fs-3">Palabras Clave</label>
+                <input type="text" class="form-control" id="keywords" name="keywords">
+                <div id="keyslHelp" class="form-text fs-5">Estas palabras deben estar separadas por , y deben ser
+                    concisas
+                </div>
+                <div id="keysHelp" class="form-text fw-bold fs-5">Ejemplo: qa,tester,automatizador,selenium,testcomplete
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="hojas" class="form-label fs-3">Hojas de Vida</label>
+                <input type="file" class="form-control" id="cvfiles" name="cvfiles" multiple required>
+                <div id="filesHelp" class="form-text fs-5">Los archivos deben ser PDF y no deben contener ni tildes, ni
+                    la letra ñ
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Filtrar</button>
+                {% if results %}
+                <a class="btn btn-info" href="{{ url_for('get_csv') }}">Descargar Resultados</a>
+                {% endif %}
+            </div>
+        </form>
+
+        {% if results %}
+        <div class="container">
+            <p>
+            <h4>Resultados</h4>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Habilidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{result[0]}}</td>
+                        <td>{{result[1]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+    </div>
+
+    {% endblock %}
