@@ -5,6 +5,7 @@ import csv
 
 app = Flask(__name__)
 
+# Folder to save the files
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
