@@ -3,7 +3,7 @@ from utils.filter import filter_candidate
 import os, glob
 import csv
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 # Folder to save the files
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
