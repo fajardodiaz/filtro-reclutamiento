@@ -1,0 +1,10 @@
+[Unit]
+Description=Infosgroup Systems
+After=network.target
+[Service]
+User=opc
+Group=opc
+WorkingDirectory=/home/opc/infosgroup-systems/venv/bin
+ExecStart=/home/opc/infosgroup-systems/venv/bin/gunicorn --bind 0.0.0.0 --workers 4 wsgi:app
+[Install]
+WantedBy=multi-user.target
